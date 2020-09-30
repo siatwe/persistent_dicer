@@ -8,6 +8,8 @@ class DiceViewModel extends CustomBaseViewModel {
     // testerArray = text.split('w');
     // print();
 
+    
+
     textFragments.add({
       'text': text,
     });

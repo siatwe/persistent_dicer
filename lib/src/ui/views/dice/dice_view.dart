@@ -38,7 +38,11 @@ class DiceView extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                for( var index in model.textFragments ) Text(index['text']),
+                for (var index in model.textFragments)
+                  Text(
+                    index['text'],
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                  ),
                 Expanded(
                   child: Container(),
                 ),
