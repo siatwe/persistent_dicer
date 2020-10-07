@@ -15,11 +15,11 @@ class App extends StatelessWidget {
       navigatorKey: locator<NavigationService>().navigatorKey,
       theme: ThemeData(
         brightness: Brightness.light,
-        // Farben?!
-        // appBarTheme: AppBarTheme(color: Colors.red)
+        appBarTheme: AppBarTheme(color: Colors.orange)
       ),
       darkTheme: ThemeData(
         brightness: Brightness.dark,
+        appBarTheme: AppBarTheme(color: Colors.orange)
       ),
     );
   }

@@ -1,5 +1,6 @@
 import 'package:persistent_dicer/src/ui/global/custom_base_view_model.dart';
 import 'dart:math';
+import 'package:intl/intl.dart';
 
 class DiceViewModel extends CustomBaseViewModel {
   List textFragments = [];
@@ -8,22 +9,37 @@ class DiceViewModel extends CustomBaseViewModel {
     if (!isValid(text)) {
       printToDiceLog("Ungültiger Wurf");
     } else {
-      var diceFragments = text.split('w');
+      var diceFragments = text.toLowerCase().split('w');
       diceFragments.removeWhere((value) => value == '');
 
       if (diceFragments.length == 1) {
-        getDiceResult(1, int.parse(diceFragments[0]));
+        getRollResult(1, int.parse(diceFragments[0]));
       } else if (diceFragments.length == 2) {
-        getDiceResult(int.parse(diceFragments[0]), int.parse(diceFragments[1]));
+        getRollResult(int.parse(diceFragments[0]), int.parse(diceFragments[1]));
       }
     }
     notifyListeners();
   }
 
-  void getDiceResult(int factor, int diceSides) {
-    final _random = new Random();
-    var rolled = 1 + _random.nextInt(diceSides - 1);
-    printToDiceLog(': ' + rolled.toString());
+  void getRollResult(int factor, int diceSides) {
+    int sum = 0;
+    print(sum);
+    for (var i = 1; i <= factor; i++) {
+      sum += getDiceResult(diceSides);
+    }
+    var timeString = DateFormat('ddmmyyyy hh:mm:ss').format(DateTime.now());
+    printToDiceLog("[" +
+        timeString +
+        '] ' +
+        factor.toString() +
+        "w" +
+        diceSides.toString() +
+        ': ' +
+        sum.toString());
+  }
+
+  int getDiceResult(int diceSides) {
+    return new Random().nextInt(diceSides + 1);
   }
 
   bool isValid(String text) {
